@@ -24,7 +24,7 @@ namespace tp7.Application.Services
         {
             var newReview = new MovieReview
             {
-                MovieId = review.MovieId,
+                MovieId = review.Movie.Id,
                 CustomerId = review.CustomerId,
                 Rating = review.Rating,
                 Comment = review.Comment,
@@ -32,15 +32,15 @@ namespace tp7.Application.Services
 
             await _movieReviewRepository.Add(newReview);
 
-            return _mapper.Map<MovieReviewDTO>(newReview)
-                ?? throw new Exception("Review not created");
+            return _mapper.Map<MovieReviewDTO>(newReview);
         }
 
         public async Task<MovieReviewDTO> GetMovieReviewById(Guid id)
         {
-            var review = await _movieReviewRepository.GetById(id);
+            var review =
+                await _movieReviewRepository.GetById(id) ?? throw new Exception("Review not found");
 
-            return _mapper.Map<MovieReviewDTO>(review) ?? throw new Exception("Review not found");
+            return _mapper.Map<MovieReviewDTO>(review);
         }
 
         public async Task<MovieReviewDTO> UpdateReview(MovieReviewDTO review)
@@ -52,8 +52,7 @@ namespace tp7.Application.Services
             var reviewEntity = _mapper.Map<MovieReview>(reviewToUpdate);
             await _movieReviewRepository.Update(reviewEntity);
 
-            return _mapper.Map<MovieReviewDTO>(reviewEntity)
-                ?? throw new Exception("Review not updated");
+            return _mapper.Map<MovieReviewDTO>(reviewEntity);
         }
 
         public async Task<MovieReviewDTO> DeleteReview(Guid id)

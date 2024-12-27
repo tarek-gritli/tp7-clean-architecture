@@ -23,5 +23,15 @@ namespace tp7.Infrastructure.Repositories
                 ?? throw new KeyNotFoundException("Customer not found.");
             return customer.Movies;
         }
+
+        public async Task<IEnumerable<MovieReview>> GetMovieReviews(Guid customerId)
+        {
+            var customer =
+                await _db
+                    .Customers.Include(c => c.Reviews)
+                    .FirstOrDefaultAsync(c => c.Id == customerId)
+                ?? throw new KeyNotFoundException("Customer not found.");
+            return customer.Reviews;
+        }
     }
 }

@@ -27,29 +27,23 @@ namespace tp7.Application.Services
 
         public async Task<CustomerDTO> CreateCustomer(CustomerDTO customer)
         {
-            var newCustomer = new Customer { Name = customer.Name };
+            var newCustomer = _mapper.Map<Customer>(customer);
 
             await _customerRepository.Add(newCustomer);
 
-            return _mapper.Map<CustomerDTO>(newCustomer)
-                ?? throw new Exception("Customer not created");
+            return _mapper.Map<CustomerDTO>(newCustomer);
         }
 
         public async Task<IEnumerable<MovieDTO>> GetFavoriteMovies(Guid customerId)
         {
             var favoriteMovies = await _customerRepository.GetFavoriteMovies(customerId);
-            return favoriteMovies.Select(movie => new MovieDTO
-            {
-                Id = movie.Id,
-                Name = movie.Name,
-                Genre = new GenreDTO { Id = movie.Genre.Id, Name = movie.Genre.Name },
-                Reviews = movie.Reviews.Select(review => new MovieReviewDTO
-                {
-                    Id = review.Id,
-                    Comment = review.Comment,
-                    Rating = review.Rating,
-                }),
-            });
+            return _mapper.Map<IEnumerable<MovieDTO>>(favoriteMovies);
+        }
+
+        public async Task<IEnumerable<MovieReviewDTO>> GetMovieReviews(Guid customerId)
+        {
+            var movieReviews = await _customerRepository.GetMovieReviews(customerId);
+            return _mapper.Map<IEnumerable<MovieReviewDTO>>(movieReviews);
         }
 
         public async Task<IEnumerable<CustomerDTO>> GetAllCustomers()
@@ -64,12 +58,11 @@ namespace tp7.Application.Services
                 await _customerRepository.GetById(customer.Id)
                 ?? throw new KeyNotFoundException("Customer not found");
 
-            customerToUpdate.Name = customer.Name;
+            _mapper.Map(customer, customerToUpdate);
 
             await _customerRepository.Update(customerToUpdate);
 
-            return _mapper.Map<CustomerDTO>(customerToUpdate)
-                ?? throw new Exception("Customer not updated");
+            return _mapper.Map<CustomerDTO>(customerToUpdate);
         }
 
         public async Task<CustomerDTO> DeleteCustomer(Guid id)
