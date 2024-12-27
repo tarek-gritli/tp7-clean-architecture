@@ -9,11 +9,11 @@ namespace tp7.Application.Services
     public class MovieReviewService : IMovieReviewService
     {
         private readonly IGenericRepository<MovieReview> _movieReviewRepository;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
         public MovieReviewService(
             IGenericRepository<MovieReview> movieReviewRepository,
-            Mapper mapper
+            IMapper mapper
         )
         {
             _movieReviewRepository = movieReviewRepository;
