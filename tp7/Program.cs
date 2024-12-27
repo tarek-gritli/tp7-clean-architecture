@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using tp7.Application.Interfaces;
+using tp7.Application.Services;
 using tp7.Domain.RepositoryInterfaces;
 using tp7.Infrastructure.Repositories;
 
@@ -15,6 +17,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IMovieReviewService, MovieReviewService>();
 
 builder.Services.AddControllers();
 
