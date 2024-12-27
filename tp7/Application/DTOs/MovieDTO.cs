@@ -10,8 +10,6 @@ namespace tp7.Application.DTOs
         [StringLength(200, ErrorMessage = "The movie name must be at most 200 characters.")]
         public string Name { get; set; } = "";
 
-        public Guid GenreId { get; set; }
-
         public GenreDTO Genre { get; set; } = new GenreDTO();
 
         public IEnumerable<MovieReviewDTO> Reviews { get; set; } = [];
