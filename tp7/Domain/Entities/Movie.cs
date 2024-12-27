@@ -13,7 +13,7 @@ namespace tp7.Domain.Entities
         public Guid GenreId { get; set; }
         public Genre Genre { get; set; } = null!;
 
-        public ICollection<Customer> Customers { get; set; } = new List<Customer>();
-        public ICollection<MovieReview> Reviews { get; set; } = new List<MovieReview>();
+        public ICollection<Customer> Customers { get; set; } = [];
+        public ICollection<MovieReview> Reviews { get; set; } = [];
     }
 }

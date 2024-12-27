@@ -12,6 +12,6 @@ namespace tp7.Application.DTOs
 
         public GenreDTO Genre { get; set; } = new GenreDTO();
 
-        public IEnumerable<MovieReviewDTO> Reviews { get; set; } = [];
+        public IEnumerable<MovieReviewDTO>? Reviews { get; set; } = [];
     }
 }
