@@ -29,5 +29,11 @@ public class ApplicationDbContext : DbContext
             .HasOne(mr => mr.Movie)
             .WithMany(m => m.Reviews)
             .HasForeignKey(mr => mr.MovieId);
+
+        modelBuilder
+            .Entity<MovieReview>()
+            .HasOne(mr => mr.Customer)
+            .WithMany(c => c.Reviews)
+            .HasForeignKey(mr => mr.CustomerId);
     }
 }

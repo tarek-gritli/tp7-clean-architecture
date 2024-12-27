@@ -6,18 +6,18 @@ namespace tp7.Infrastructure.Repositories
 {
     public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
         public CustomerRepository(ApplicationDbContext context)
             : base(context)
         {
-            _context = context;
+            _db = context;
         }
 
         public async Task<IEnumerable<Movie>> GetFavoriteMovies(Guid customerId)
         {
             var customer =
-                await _context
+                await _db
                     .Customers.Include(c => c.Movies)
                     .FirstOrDefaultAsync(c => c.Id == customerId)
                 ?? throw new KeyNotFoundException("Customer not found.");
