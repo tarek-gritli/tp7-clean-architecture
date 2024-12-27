@@ -1,13 +1,14 @@
 using tp7.Application.DTOs;
-using tp7.Domain.Entities;
 
 namespace tp7.Application.Interfaces
 {
     public interface ICustomerService
     {
-        Task<Customer> GetCustomerById(Guid id);
-        Task<Customer> CreateCustomer(CustomerDTO customer);
-        Task<Customer> UpdateCustomer(CustomerDTO customer);
-        Task DeleteCustomer(Guid id);
+        Task<CustomerDTO> GetCustomerById(Guid id);
+        Task<CustomerDTO> CreateCustomer(CustomerDTO customer);
+        Task<IEnumerable<MovieDTO>> GetFavoriteMovies(Guid customerId);
+        Task<IEnumerable<CustomerDTO>> GetAllCustomers();
+        Task<CustomerDTO> UpdateCustomer(CustomerDTO customer);
+        Task<CustomerDTO> DeleteCustomer(Guid id);
     }
 }
