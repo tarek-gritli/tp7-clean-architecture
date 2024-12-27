@@ -12,6 +12,8 @@ namespace tp7.Application.DTOs
 
         public Guid GenreId { get; set; }
 
-        public GenreDTO Genre { get; set; } = new GenreDTO(); // Nested GenreDTO (if needed)
+        public GenreDTO Genre { get; set; } = new GenreDTO();
+
+        public IEnumerable<MovieReviewDTO> Reviews { get; set; } = [];
     }
 }
