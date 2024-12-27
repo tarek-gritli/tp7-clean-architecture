@@ -3,6 +3,7 @@ using tp7.Application.Interfaces;
 using tp7.Application.Services;
 using tp7.Domain.RepositoryInterfaces;
 using tp7.Infrastructure.Repositories;
+using tp7.UI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +24,14 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IMovieReviewService, MovieReviewService>();
 
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
