@@ -13,7 +13,7 @@ namespace tp7.Application.DTOs
         [Range(0, 5, ErrorMessage = "The rating must be between 0 and 5.")]
         public int Rating { get; set; } = 0;
 
-        public Guid MovieId { get; set; }
+        public MovieDTO Movie { get; set; } = new MovieDTO();
 
         public Guid CustomerId { get; set; }
     }
