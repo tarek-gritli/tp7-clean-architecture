@@ -15,5 +15,7 @@ namespace tp7.Domain.Entities
         public Movie Movie { get; set; } = null!;
 
         public Guid MovieId { get; set; }
+        public Customer Customer { get; set; } = null!;
+        public Guid CustomerId { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace tp7.Application.DTOs
         public int Rating { get; set; } = 0;
 
         public Guid MovieId { get; set; }
+
+        public Guid CustomerId { get; set; }
     }
 }
