@@ -5,5 +5,7 @@ namespace tp7.Application.Interfaces
     public interface IMovieService
     {
         Task<IEnumerable<MovieDTO>> GetMoviesByGenre(Guid genreId);
+
+        Task<double> GetMovieAverageRating(Guid movieId);
     }
 }
