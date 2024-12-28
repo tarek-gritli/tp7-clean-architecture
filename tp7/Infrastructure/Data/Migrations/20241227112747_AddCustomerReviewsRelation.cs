@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace tp7.Migrations
+namespace tp7.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddCustomerReviewsRelation : Migration

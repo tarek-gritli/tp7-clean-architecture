@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace tp7.Migrations
+namespace tp7.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -33,7 +33,7 @@ namespace tp7.Migrations
 
                     b.HasIndex("MoviesId");
 
-                    b.ToTable("CustomerMovie");
+                    b.ToTable("CustomerMovie", (string)null);
                 });
 
             modelBuilder.Entity("tp7.Domain.Entities.Customer", b =>
@@ -49,7 +49,7 @@ namespace tp7.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("tp7.Domain.Entities.Genre", b =>
@@ -65,7 +65,7 @@ namespace tp7.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("tp7.Domain.Entities.Movie", b =>
@@ -86,7 +86,7 @@ namespace tp7.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movies", (string)null);
                 });
 
             modelBuilder.Entity("tp7.Domain.Entities.MovieReview", b =>
@@ -115,7 +115,7 @@ namespace tp7.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("MovieReviews");
+                    b.ToTable("MovieReviews", (string)null);
                 });
 
             modelBuilder.Entity("CustomerMovie", b =>
