@@ -16,7 +16,7 @@ namespace tp7.UI.Controllers
         }
 
         // GET: /api/customer/{customerId}/movies
-        [HttpGet("/{customerId}/movies")]
+        [HttpGet("{customerId}/movies")]
         public async Task<ActionResult<IEnumerable<MovieDTO>>> GetFavoriteMovies(Guid customerId)
         {
             try
@@ -31,7 +31,7 @@ namespace tp7.UI.Controllers
         }
 
         // GET: /api/customer/{customerId}/reviews
-        [HttpGet("/{customerId}/reviews")]
+        [HttpGet("{customerId}/reviews")]
         public async Task<ActionResult<IEnumerable<MovieReviewDTO>>> GetMovieReviews(
             Guid customerId
         )

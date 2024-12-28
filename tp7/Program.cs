@@ -23,6 +23,7 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IMovieReviewService, MovieReviewService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
 
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();

@@ -59,10 +59,15 @@ namespace tp7.Application.Services
 
         public async Task UpdateCustomer(CustomerDTO customer)
         {
-            var customerToUpdate = await GetCustomerById(customer.Id);
-
-            var customerEntity = _mapper.Map<Customer>(customerToUpdate);
-            await _customerRepository.Update(customerEntity);
+            try
+            {
+                var customerEntity = _mapper.Map<Customer>(customer);
+                await _customerRepository.Update(customerEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating customer", ex);
+            }
         }
 
         public async Task DeleteCustomer(Guid id)
