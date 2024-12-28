@@ -10,7 +10,7 @@ namespace tp7.Application.Interfaces
 
         Task<IEnumerable<MovieReviewDTO>> GetMovieReviews(Guid customerId);
         Task<IEnumerable<CustomerDTO>> GetAllCustomers();
-        Task<CustomerDTO> UpdateCustomer(CustomerDTO customer);
-        Task<CustomerDTO> DeleteCustomer(Guid id);
+        Task UpdateCustomer(CustomerDTO customer);
+        Task DeleteCustomer(Guid id);
     }
 }

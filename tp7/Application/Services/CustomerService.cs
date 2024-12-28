@@ -19,10 +19,15 @@ namespace tp7.Application.Services
 
         public async Task<CustomerDTO> GetCustomerById(Guid id)
         {
-            var customer =
-                await _customerRepository.GetById(id)
-                ?? throw new KeyNotFoundException("Customer not found");
-            return _mapper.Map<CustomerDTO>(customer);
+            try
+            {
+                var customer = await _customerRepository.GetById(id);
+                return _mapper.Map<CustomerDTO>(customer);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new KeyNotFoundException("Customer not found.");
+            }
         }
 
         public async Task<CustomerDTO> CreateCustomer(CustomerDTO customer)
@@ -52,26 +57,24 @@ namespace tp7.Application.Services
             return _mapper.Map<IEnumerable<CustomerDTO>>(customers);
         }
 
-        public async Task<CustomerDTO> UpdateCustomer(CustomerDTO customer)
+        public async Task UpdateCustomer(CustomerDTO customer)
         {
-            var customerToUpdate =
-                await _customerRepository.GetById(customer.Id)
-                ?? throw new KeyNotFoundException("Customer not found");
+            var customerToUpdate = await GetCustomerById(customer.Id);
 
-            _mapper.Map(customer, customerToUpdate);
-
-            await _customerRepository.Update(customerToUpdate);
-
-            return _mapper.Map<CustomerDTO>(customerToUpdate);
+            var customerEntity = _mapper.Map<Customer>(customerToUpdate);
+            await _customerRepository.Update(customerEntity);
         }
 
-        public async Task<CustomerDTO> DeleteCustomer(Guid id)
+        public async Task DeleteCustomer(Guid id)
         {
-            var customer =
-                await _customerRepository.GetById(id)
-                ?? throw new KeyNotFoundException("Customer not found.");
-            await _customerRepository.Delete(id);
-            return _mapper.Map<CustomerDTO>(customer);
+            try
+            {
+                await _customerRepository.Delete(id);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new KeyNotFoundException("Customer not found.");
+            }
         }
     }
 }
